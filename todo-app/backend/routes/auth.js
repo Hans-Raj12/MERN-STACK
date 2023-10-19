@@ -9,12 +9,12 @@ router.post('/register', async (req, res) => {
         const hashPassword =  bcrypt.hashSync(password);
         const user = await User.findOne({email})
         if(user){
-            return res.status(400).json({message: 'User already exists'});
+            return res.status(200).json({message: 'User already exists'});
         }
 
         const newUser = new User({username, email, password:hashPassword});
         await newUser.save();
-        res.status(200).json({user: newUser});
+        res.status(200).json({message: "signup successful"});
 
     } catch(err){
         res.status(400).json({message: err.message});
@@ -28,11 +28,11 @@ router.post('/signin', async (req, res) => {
         
         const user = await User.findOne({email:req.body.email});
         if(!user){
-            return res.status(400).json({message: 'Please Register'});
+            return res.status(200).json({message: 'Please Register'});
         }
         const isMatch = bcrypt.compareSync(req.body.password, user.password);
         if(!isMatch){
-            return res.status(400).json({message: 'Invalid Credentials'});
+            return res.status(200).json({message: 'Invalid Credentials'});
         }
         const { password, ...others } = user._doc;
         res.status(200).json({user : others});

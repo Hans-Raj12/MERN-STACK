@@ -5,8 +5,8 @@ const List = require('../models/list');
 //addTask
 router.post('/addTask', async (req, res) => {
     try{
-        const {title, body, email}  = req.body;
-        const existingUser = await User.findOne({email});
+        const {title, body, id}  = req.body;
+        const existingUser = await User.findById({_id:id});
         if(existingUser){
         const list = new List({title, body, user:existingUser});
             await list.save();
@@ -24,14 +24,13 @@ router.post('/addTask', async (req, res) => {
 router.put('/updateTask/:id', async (req, res) => {
     try{
         const id = req.params.id;
-        const {title, body, email}  = req.body;
-        const existingUser = await User.findOne({email});
-        if(existingUser){
-            const list = await List.findByIdAndUpdate(id, {title, body});
-            list.save().then(()=>{
-                res.status(200).json({message: "Task updated successfully"});
-            })        
-        }
+        const {title, body}  = req.body;
+        
+        const list = await List.findByIdAndUpdate(id, {title, body});
+        list.save().then(()=>{
+            res.status(200).json({message: "Task updated successfully"});
+        })        
+    
     }
     catch(err){
         console.log(err)
@@ -42,11 +41,11 @@ router.put('/updateTask/:id', async (req, res) => {
 //deletedTask
 router.delete('/deleteTask/:id', async (req, res) => {
     try{
-        const id = req.params.id;
-        const { email}  = req.body;
-        const existingUser = await User.findOneAndUpdate({email},{$pull:{list:id}});
+        
+        const { id}  = req.body;
+        const existingUser = await User.findByIdAndUpdate(id,{$pull:{list:id}});
          if(existingUser){
-            const list = await List.findByIdAndDelete(id).then(()=>{
+            const list = await List.findByIdAndDelete(req.params.id).then(()=>{
                 res.status(200).json({message: "Task deleted successfully"});
             })        
         }

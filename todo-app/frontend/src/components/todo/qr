@@ -1,0 +1,16 @@
+QR System (Ecommerce)
+
+# Role (Admin, User)
+
+- Admin
+  . QR Generate: Quantity of QR, Select Size of QR (50, 75, 100,125,150)  
+   . Users & Pet: list and when click view then show user's pet complete info
+  . Admin can add new admin with their permissions
+  . QR Generate: When Admin Generate QR code it will contain (guid_id) and
+  example: www.domain.com/scan?qr_id=dsfkadsjfkwerkjr23k4j23jn2k
+
+User
+. He will scan QR code it wil shown: example: www.domain.com/scan?qr_id=dsfkadsjfkwerkjr23k4j23jn2k
+
+    . When user click this link it will redirect to domain/scan page and validate
+    guid_id in database if guid_id is available and status inactive of qr_id

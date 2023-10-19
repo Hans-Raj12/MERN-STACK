@@ -1,0 +1,44 @@
+.signup{
+    width: 100%;
+    height: 100vh;
+
+}
+.signup .container .row .column{
+    height: 100vh ;
+}
+.input-signup{
+    outline: none;
+
+}
+
+.signup-heading{
+    font-style: italic;
+    font-size: 100px;
+    color: white;
+    
+}
+
+.col-left{
+    background-color: rgb(247,83,54);
+    color: white !important;
+    border-top-left-radius: 400px;
+    border-bottom-right-radius: 400px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+}
+
+.btn-signup{
+    background-color: rgb(247,83,54);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    
+}
+.btn-signup:hover{
+    transform: scale(1.05);
+    transition: all ease-in 0.6s;
+}
